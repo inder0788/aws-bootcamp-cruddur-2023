@@ -48,6 +48,7 @@ tasks:
 ```
 
 ### Store User Credentials for Gitpod Workspace
+Gitpod can securely store env. variables per workspace, so user credentials related env vars were set up by executing below commands.
 
 ```
 gp env AWS_ACCESS_KEY_ID="ABCDEFGHIJKLMNOP"
@@ -58,4 +59,4 @@ gp env AWS_DEFAULT_REGION="us-east-1"
 
 Verified that the CLI is installed and the user can connect to AWS account using the credentials stored in gitpod.
 
-![Result](https://raw.githubusercontent.com/inder0788/aws-bootcamp-cruddur-2023/wave0/journal/media/aws-cli-install-via-gitpod.png)
+![Result](journal/media/aws-cli-install-via-gitpod.png "gitpod-setup")
