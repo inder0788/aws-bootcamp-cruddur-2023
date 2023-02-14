@@ -54,3 +54,8 @@ gp env AWS_ACCESS_KEY_ID="ABCDEFGHIJKLMNOP"
 gp env AWS_SECRET_ACCESS_KEY="ABCD_1234_EFGHIJKL"
 gp env AWS_DEFAULT_REGION="us-east-1"
 ```
+### Verify AWS CLI set up and AWS access
+
+Verified that the CLI is installed and the user can connect to AWS account using the credentials stored in gitpod.
+
+![Result](https://raw.githubusercontent.com/inder0788/aws-bootcamp-cruddur-2023/wave0/journal/media/aws-cli-install-via-gitpod.png)
