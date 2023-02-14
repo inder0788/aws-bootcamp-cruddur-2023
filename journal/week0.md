@@ -59,4 +59,12 @@ gp env AWS_DEFAULT_REGION="us-east-1"
 
 Verified that the CLI is installed and the user can connect to AWS account using the credentials stored in gitpod.
 
-![Result](journal/media/aws-cli-install-via-gitpod.png "gitpod-setup")
+![Gitpod Config View](media/aws-cli-install-via-gitpod.png "gitpod-setup")
+
+
+## NAPKIN based Conceptual Design
+
+Please refer the conceptual design for the Cruddur application below. This is as per my understanding after reading the bootcamp outline document created by Andrew.
+
+![Conceptual Design](media/Conceptual_Arch.jpg "Conceptual Design")
+
