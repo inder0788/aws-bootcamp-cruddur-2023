@@ -103,10 +103,28 @@ aws cloudwatch put-metric-alarm --cli-input-json file://alarm_config.json
 ![Automation Script](media/Alarm_Script_Execution.jpg "Automation Script")
 ![Alarm SetUp](media/Billing_alarm.jpg "Alarm SetUp")
 
+### Monthly Budget set up.
+Created a montly budget that will send alerts when `ACTUAL_SPEND` reaches 80% and 100% of the monthyly threshold(5 dollars).
+
+```
+aws budgets create-budget \
+    --account-id $account_id \
+    --budget file://budget.json \
+    --notifications-with-subscribers file://budget-subscribers.json
+```    
+![Monthly Budget](media/Monthly_Budget.jpg "Monthly Budget")
+
+# Extended Work for the Week
 
 ## Conceptual Design on Napkin
 
 Please refer the conceptual design for the Cruddur application below. This is as per my understanding after reading the bootcamp outline document created by Andrew.
 
 ![Conceptual Design](media/Conceptual_Arch.jpg "Conceptual Design")
+
+## Logical Design for Currudur
+
+Please refer the logical design for the Cruddur application below. This is as per my understanding after reading the bootcamp outline document created by Andrew.
+
+![Logical Design](media/Logical_Arch.jpg "Logical Design")
 
