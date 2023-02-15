@@ -61,6 +61,46 @@ Verified that the CLI is installed and the user can connect to AWS account using
 
 ![Gitpod Config View](media/aws-cli-install-via-gitpod.png "gitpod-setup")
 
+## Alarm and Budget Set Up
+
+### Automation of Alarm set up.
+
+As a standard practice every AWS account should have alerts/alarm set up to notify admins whenever the expected spend thresholds are breached. 
+
+- Created a `bash script` to execute various AWS CLI commands in one shot to reduce manual effort.
+- Script expects name of the "SNS topic" and "subscriber's email address".
+- Script auto updates the relevant json config file before executing next command.
+
+![Alarm SetUp](media/Billing_alarm.jpg "Alarm SetUp")
+![Automation Script](media/Alarm_Script_Execution.jpg "Automation Script")
+
+```sh
+#!/bin/sh
+sns_name=$1
+subscriber_email=$2
+
+#Create SNS Topic
+echo "###Creating SNS topic###"
+sns_arn=$(aws sns create-topic --name $sns_name | jq -r '.TopicArn')
+echo "SNS topic for Billing Alarm has arn- ${sns_arn}"
+
+#Create Subscription
+if [ -z "$subscriber_email" ]
+then
+        echo "###No Subscriber email provided###"
+else
+        echo "###Setting Subscription for the email ID###"
+        subscribe_output=$(aws sns subscribe --topic-arn $sns_arn --protocol email --notification-endpoint $subscriber_email)
+        echo $subscribe_output
+fi
+
+# Create Alarm using "EstimatedCharges" metric.
+cat alarm.json | jq '.AlarmActions = [ $sns ]' --arg sns $sns_arn > alarm_config.json
+echo "final alarm config saved in 'alarm_config.json' file for refereence."
+
+echo "Creating CW Alarm now"
+aws cloudwatch put-metric-alarm --cli-input-json file://alarm_config.json
+```
 
 ## NAPKIN based Conceptual Design
 
