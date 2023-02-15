@@ -109,8 +109,8 @@ Created a montly budget that will send alerts when `ACTUAL_SPEND` reaches 80% an
 ```
 aws budgets create-budget \
     --account-id $account_id \
-    --budget file://budget.json \
-    --notifications-with-subscribers file://budget-subscribers.json
+    --budget file://automation/config/json/budget.json \
+    --notifications-with-subscribers file://automation/config/json/budget-subscribers.json
 ```    
 ![Monthly Budget](media/Monthly_Budget.jpg "Monthly Budget")
 
