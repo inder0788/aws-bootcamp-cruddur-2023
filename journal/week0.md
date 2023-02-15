@@ -14,6 +14,7 @@ For performing various tasks during the bootcamp an IAM user was created as belo
 ### Enable Billing 
 
 Enabled biling alerts for the AWS account from Billing page using root user.
+![Billing Alerts](media/Billing_Alerts.png "Billing Alerts")
 
 ### MFA enabled for root and admin user
 
@@ -71,9 +72,6 @@ As a standard practice every AWS account should have alerts/alarm set up to noti
 - Script expects name of the "SNS topic" and "subscriber's email address".
 - Script auto updates the relevant json config file before executing next command.
 
-![Alarm SetUp](media/Billing_alarm.jpg "Alarm SetUp")
-![Automation Script](media/Alarm_Script_Execution.jpg "Automation Script")
-
 ```sh
 #!/bin/sh
 sns_name=$1
@@ -101,8 +99,12 @@ echo "final alarm config saved in 'alarm_config.json' file for refereence."
 echo "Creating CW Alarm now"
 aws cloudwatch put-metric-alarm --cli-input-json file://alarm_config.json
 ```
+#### Script Execution and Account View
+![Automation Script](media/Alarm_Script_Execution.jpg "Automation Script")
+![Alarm SetUp](media/Billing_alarm.jpg "Alarm SetUp")
 
-## NAPKIN based Conceptual Design
+
+## Conceptual Design on Napkin
 
 Please refer the conceptual design for the Cruddur application below. This is as per my understanding after reading the bootcamp outline document created by Andrew.
 
