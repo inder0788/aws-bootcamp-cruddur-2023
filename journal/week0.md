@@ -170,6 +170,14 @@ fi
 
 ![AWS Console View](media/EventRule.png "CW Rule and SNS for SVC health Monitoring")
 
+## AWS Organization OU Creation
+Created 2 OUs for prod and non-prod workloads. I am planning to create dedicated account for workload and DevOps down the line.
+
+![AWS org View ](media/AWS_Org.png "Org Structure")
+
+## Enabled Cloud trails
+Created a cloud trail to track all API calls(management events) for now.
+
 
 
 
