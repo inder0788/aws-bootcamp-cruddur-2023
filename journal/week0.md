@@ -122,9 +122,52 @@ Please refer the conceptual design for the Cruddur application below. This is as
 
 ![Conceptual Design](media/Conceptual_Arch.jpg "Conceptual Design")
 
-## Logical Design for Currudur
+## Logical Design with `CI/CD Pipeline`
 
 Please refer the logical design for the Cruddur application below. This is as per my understanding after reading the bootcamp outline document created by Andrew.
 
-![Logical Design](media/Logical_Arch.jpg "Logical Design")
+![Logical Design](media/Cruddur-Logical-View.jpeg "Logical Design")
+
+The logical diagram is available here as well- https://lucid.app/lucidchart/5738b82f-d0a4-48fe-a3cc-91e969e1a84e/edit?invitationId=inv_05ac1814-2fb7-471d-a463-754a70c273aa&page=0_0#
+
+## AWS Service health Monitor using Event Bridge Rule
+
+Configured a rule to monitor few AWS services that are crucial for the Cruddur project.
+
+### Automation with Shell Script
+
+The rule creation was automated, so that there is no need to manually run the various AWS cli commands one by one.
+
+```sh
+#!/bin/sh
+cw_event_rule_name=$1
+sns_name=$2
+
+#Create CloudWatch Event Rule
+echo "###Creating CloudWatch Event Rule for AWS Service Health Alerts###"
+aws events put-rule --name $cw_event_rule_name --event-pattern file://health_event.json
+
+#Create SNS Topic
+echo "###Creating SNS topic for AWS Service Health Alerts###"
+sns_arn=$(aws sns create-topic --name $sns_name | jq -r '.TopicArn')
+echo "SNS topic for Health Monitor has arn- ${sns_arn}"
+
+# Update Target config with SNS created earlier.
+cat health_rule_target.json | jq '.Targets[].Arn = $sns ' --arg sns $sns_arn > health_rule_target_final.json
+echo "CW Event Rule target config has been updated with SNS Arn."
+
+#Adding SNS Target to CloudWatch Event Rule
+echo "###Adding SNS as target to CloudWatch Event Rule###"
+aws events put-targets --rule $cw_event_rule_name --cli-input-json file://health_rule_target_final.json
+if [ $? -eq 0 ];then
+    echo "CW rule configured with SNS target"
+    echo "Deleting temp file"
+    rm health_rule_target_final.json
+fi
+```
+### Script Execution Result
+![Script Execution](media/AWS_service_health_monitor_rule.jpg "Script Execution")
+
+
+
 
