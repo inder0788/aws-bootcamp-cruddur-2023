@@ -168,6 +168,8 @@ fi
 ### Script Execution Result
 ![Script Execution](media/AWS_service_health_monitor_rule.jpg "Script Execution")
 
+![AWS Console View](media/EventRule.png "CW Rule and SNS for SVC health Monitoring")
+
 
 
 
