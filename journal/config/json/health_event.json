@@ -1,0 +1,8 @@
+{
+    "source": ["aws.health"],
+    "detail-type": ["AWS Health Event"],
+    "detail": {
+      "service": ["S3","ECS","EC2","ROUTE53"],
+      "eventTypeCategory": ["issue","scheduledChange"]
+    }
+}  

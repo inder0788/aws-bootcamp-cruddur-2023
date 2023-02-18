@@ -1,0 +1,9 @@
+{
+    "Rule": "aws-service-health-check-rule",
+    "Targets": [
+      {
+        "Id": "sns",
+        "Arn": ""
+      }
+    ]
+}
